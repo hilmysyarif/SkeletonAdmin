@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Hash;
 use Filament\Infolists\Components\TextEntry;
+use Tapp\FilamentAuditing\RelationManagers\AuditsRelationManager;
 
 class UserResource extends Resource
 {
@@ -50,7 +51,7 @@ class UserResource extends Resource
                             ->password()
                             ->maxLength(255)
                             ->required(fn ($component, $get, $livewire, $model, $record, $set, $state) => $record === null)
-                            ->dehydrateStateUsing(fn ($state) => ! empty($state) ? Hash::make($state) : '')
+                            ->dehydrateStateUsing(fn ($state) => !empty($state) ? Hash::make($state) : '')
                             ->label(ucwords(__('validation.attributes.password'))),
                         Forms\Components\TextInput::make('passwordConfirmation')
                             ->password()
@@ -120,6 +121,7 @@ class UserResource extends Resource
     {
         return [
             //
+            AuditsRelationManager::class,
         ];
     }
 
@@ -149,5 +151,4 @@ class UserResource extends Resource
                     ])->columns(2)
             ]);
     }
-
 }

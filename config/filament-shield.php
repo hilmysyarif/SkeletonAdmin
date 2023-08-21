@@ -62,7 +62,7 @@ return [
         'enabled' => true,
 
         'pages' => [
-            'Dashboard',
+            // 'Dashboard',
         ],
 
         'widgets' => [
